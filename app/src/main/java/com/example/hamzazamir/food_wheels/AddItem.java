@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -73,6 +74,22 @@ public class AddItem extends AppCompatActivity implements View.OnClickListener{
         String itemprice = item_price.getText().toString().trim();
         String itemquan = item_quan.getText().toString().trim();
 
+        if (TextUtils.isEmpty(itemname)) {
+            Toast.makeText(this, "Please enter Item name", Toast.LENGTH_LONG).show();
+            return;
+        }
+        if (TextUtils.isEmpty(itemdes)) {
+            Toast.makeText(this, "Please enter Item Description", Toast.LENGTH_LONG).show();
+            return;
+        }
+        if (TextUtils.isEmpty(itemprice)) {
+            Toast.makeText(this, "Please enter Item Price", Toast.LENGTH_LONG).show();
+            return;
+        }
+        if (TextUtils.isEmpty(itemquan)) {
+            Toast.makeText(this, "Please enter Item Quantity", Toast.LENGTH_LONG).show();
+            return;
+        }
         final ItemInformation info = new ItemInformation(itemname, itemdes, itemquan, itemprice, item_id);
 
         mRef = FirebaseDatabase.getInstance().getReference().child("Items").child(user.getUid());
