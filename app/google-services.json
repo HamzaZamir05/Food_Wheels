@@ -1,0 +1,130 @@
+{
+  "project_info": {
+    "project_number": "555539056513",
+    "firebase_url": "https://food-wheels.firebaseio.com",
+    "project_id": "food-wheels",
+    "storage_bucket": "food-wheels.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:555539056513:android:9ec37a8f33355051",
+        "android_client_info": {
+          "package_name": "com.example.hamzazamir.foodwheels"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "555539056513-i88himk44e18lmq31rb11v5e370ndkof.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.hamzazamir.foodwheels",
+            "certificate_hash": "db8c84b8b6af75b45ceca445ca2714adfb424d8f"
+          }
+        },
+        {
+          "client_id": "555539056513-fi8ulnlchu9v1dkoto3f0lcvpel09f7q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0T-kwfF8n3UGfYpInpgbkkTrUmtKH3_Y"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "555539056513-fi8ulnlchu9v1dkoto3f0lcvpel09f7q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:555539056513:android:3a20d74c466c1ea3",
+        "android_client_info": {
+          "package_name": "com.exapmle.hamzazamir.test"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "555539056513-fi8ulnlchu9v1dkoto3f0lcvpel09f7q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0T-kwfF8n3UGfYpInpgbkkTrUmtKH3_Y"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:555539056513:android:e66a0b6ebcd46e11",
+        "android_client_info": {
+          "package_name": "com.example.hamzazamir.food_wheels"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "555539056513-nb9819c9m5oc91c30guksorvs2cndj58.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.hamzazamir.food_wheels",
+            "certificate_hash": "8e6dbad5c28bd3964bce85364d18431d50e665c0"
+          }
+        },
+        {
+          "client_id": "555539056513-fi8ulnlchu9v1dkoto3f0lcvpel09f7q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0T-kwfF8n3UGfYpInpgbkkTrUmtKH3_Y"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "555539056513-fi8ulnlchu9v1dkoto3f0lcvpel09f7q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

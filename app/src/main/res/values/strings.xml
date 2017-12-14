@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Food_Wheels</string>
+    <array name="Type">
+        <item>Hotel</item>
+        <item>Marriage Hall</item>
+        <item>Welfare Organization</item>
+        <item>Volunteer</item>
+    </array>
+</resources>
