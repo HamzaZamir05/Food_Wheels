@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_add_item"
     android:layout_width="match_parent"
+    android:background="#fcf9ea"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -110,6 +111,8 @@
         android:textStyle="normal|bold|italic"
         android:layout_below="@+id/item_price"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="42dp" />
+        android:layout_marginTop="42dp"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/cardview_light_background" />
 
 </RelativeLayout>

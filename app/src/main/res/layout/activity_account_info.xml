@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_account_info"
     android:layout_width="match_parent"
+    android:background="#fcf9ea"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -128,7 +129,9 @@
         android:fontFamily="serif"
         android:layout_alignBaseline="@+id/logout"
         android:layout_alignBottom="@+id/logout"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/cardview_light_background" />
 
     <Button
         android:text="Log Out"
@@ -144,7 +147,10 @@
         android:layout_marginTop="24dp"
         android:layout_marginStart="21dp"
         android:layout_below="@+id/update_addr"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/cardview_light_background"
+        android:elevation="0dp" />
 
     <Button
         android:text="Delete"
@@ -160,7 +166,9 @@
         android:layout_marginStart="11dp"
         android:layout_alignBaseline="@+id/update_btn"
         android:layout_alignBottom="@+id/update_btn"
-        android:layout_toEndOf="@+id/update_btn" />
+        android:layout_toEndOf="@+id/update_btn"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/cardview_light_background" />
 
     <Button
         android:text="Menu"
@@ -175,7 +183,9 @@
         android:fontFamily="serif"
         android:visibility="visible"
         android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/textView4" />
+        android:layout_alignStart="@+id/textView4"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/cardview_light_background" />
 
     <Button
         android:text="Add item"
@@ -190,7 +200,9 @@
         android:fontFamily="serif"
         android:layout_alignParentBottom="true"
         android:layout_toEndOf="@+id/menu"
-        android:layout_marginStart="13dp" />
+        android:layout_marginStart="13dp"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/cardview_light_background" />
 
 
 </RelativeLayout>
