@@ -85,8 +85,6 @@ public class Menu extends AppCompatActivity implements View.OnClickListener {
                 String Iquan = map.get("itemquan");
                 String Iid = map.get("Item_id");
 
-                Toast.makeText(getApplicationContext(), Iname, Toast.LENGTH_LONG).show();
-
                 item_name.setText(Iname);
                 item_price.setText(Iprice);
                 item_quan.setText(Iquan);
