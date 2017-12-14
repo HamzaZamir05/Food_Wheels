@@ -105,6 +105,7 @@ public class AccountInfo extends AppCompatActivity implements View.OnClickListen
     }
 
     private void DeleteAcc(){
+        Toast.makeText(this, "test", Toast.LENGTH_SHORT).show();
             mRef = FirebaseDatabase.getInstance().getReference().child("USERS");
             FirebaseUser user = Auth.getCurrentUser();
             DatabaseReference db = FirebaseDatabase.getInstance().getReference(user.getUid()).child("USERS");
