@@ -86,7 +86,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
+        android:inputType="phone"
         android:ems="10"
         android:drawableLeft="@drawable/ic_call_black_24dp"
         android:id="@+id/update_cont"
