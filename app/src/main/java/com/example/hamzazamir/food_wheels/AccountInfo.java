@@ -118,6 +118,7 @@ public class AccountInfo extends AppCompatActivity implements View.OnClickListen
             startActivity(new Intent(this,LogIn.class));
 
     }
+
     private void Update(){
        final String email = update_email.getText().toString();
         final String name = update_name.getText().toString();
@@ -200,9 +201,6 @@ public class AccountInfo extends AppCompatActivity implements View.OnClickListen
 
 
      }
-
-
-
 
     @Override
     public void onClick(View v) {

@@ -2,6 +2,8 @@ package com.example.hamzazamir.food_wheels;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +15,8 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -40,7 +44,7 @@ public class LogIn extends AppCompatActivity implements View.OnClickListener {
         Auth = FirebaseAuth.getInstance();
         if (Auth.getCurrentUser() != null) {
             finish();
-            startActivity(new Intent(getApplicationContext(), AccountInfo.class));
+            startActivity(new Intent(getApplicationContext(), com.example.hamzazamir.food_wheels.Location.class));
         }
 
         login_btn = (Button) findViewById(R.id.login_btn);
@@ -54,7 +58,9 @@ public class LogIn extends AppCompatActivity implements View.OnClickListener {
         login_btn.setOnClickListener(this);
         forgot.setOnClickListener(this);
         NewMem.setOnClickListener(this);
+
     }
+
     private void userLogin(){
         String email = login_email.getText().toString().trim();
         String password  = login_pass.getText().toString().trim();

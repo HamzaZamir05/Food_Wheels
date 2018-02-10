@@ -1,4 +1,5 @@
 <resources>
+    <string name="google_masp_API_key">AIzaSyDzsJ602GRkM0xuje0IhqyrlV_ckwtNL6U</string>
     <string name="app_name">Food_Wheels</string>
     <array name="Type">
         <item>Hotel</item>
@@ -6,4 +7,8 @@
         <item>Welfare Organization</item>
         <item>Volunteer</item>
     </array>
+    ]
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+    <string name="title_activity_location">Map</string>
 </resources>
