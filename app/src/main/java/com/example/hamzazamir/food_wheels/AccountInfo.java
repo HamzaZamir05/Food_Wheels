@@ -104,18 +104,20 @@ public class AccountInfo extends AppCompatActivity implements View.OnClickListen
 
     }
 
-    private void DeleteAcc(){
-            mRef = FirebaseDatabase.getInstance().getReference().child("USERS");
-            FirebaseUser user = Auth.getCurrentUser();
-            DatabaseReference db = FirebaseDatabase.getInstance().getReference(user.getUid()).child("USERS");
-            user.delete();
-            user = Auth.getCurrentUser();
-            mRef.child(user.getUid()).setValue(null);
-            DatabaseReference FB = FirebaseDatabase.getInstance().getReference().child("Items").child(user.getUid());
-            FB.setValue(null);
-            Auth.signOut();
-            finish();
-            startActivity(new Intent(this,LogIn.class));
+    private void DeleteAcc() {
+        mRef = FirebaseDatabase.getInstance().getReference().child("USERS");
+        FirebaseUser user = Auth.getCurrentUser();
+        DatabaseReference db = FirebaseDatabase.getInstance().getReference(user.getUid()).child("USERS");
+        user.delete();
+        user = Auth.getCurrentUser();
+        mRef.child(user.getUid()).setValue(null);
+        DatabaseReference FB = FirebaseDatabase.getInstance().getReference().child("Items").child(user.getUid());
+        DatabaseReference FL = FirebaseDatabase.getInstance().getReference().child("Locations").child(user.getUid());
+
+        FB.setValue(null);
+        FL.setValue(null);
+        Auth.signOut();
+        startActivity(new Intent(this, LogIn.class));
 
     }
 

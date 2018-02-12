@@ -38,6 +38,7 @@ public class ItemInformation {
     public void setItemdes(String itemdes) {
         this.itemdes = itemdes;
     }
+
     public void setItem_Id(String item_Id) {
         this.item_Id = item_Id;
     }

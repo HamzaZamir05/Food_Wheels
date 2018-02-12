@@ -2,14 +2,17 @@ package com.example.hamzazamir.food_wheels;
 
 import android.*;
 import android.content.pm.PackageManager;
+import android.location.LocationManager;
 import android.os.Build;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -25,11 +28,30 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import java.util.Map;
+import java.util.UUID;
 
 public class Location extends FragmentActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
-        LocationListener {
+        LocationListener,NavigationView.OnNavigationItemSelectedListener {
+    LocationManager locationManager;
+    static double longi;
+    static double lati;
+    final String location_id = UUID.randomUUID().toString();
+
+    private DatabaseReference mRef;
+    private FirebaseAuth Auth;
 
     private GoogleMap mMap;
     private GoogleApiClient client;
@@ -37,12 +59,35 @@ public class Location extends FragmentActivity implements OnMapReadyCallback,
     private android.location.Location lastlocation;
     private Marker currentLocationMarker;
     public static final int  REQUEST_LOCATION = 99;
+
+   // String location_id = null;
+
     boolean doubleBackToExitPressedOnce = false;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location);
 
+        Auth = FirebaseAuth.getInstance();
+        FirebaseUser user = Auth.getCurrentUser();
+     /*   mRef =  FirebaseDatabase.getInstance().getReference().child("Locations").child(user.getUid()).child(location_id);
+        mRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Map<String, String> map = (Map)dataSnapshot.getValue();
+
+                String longitude = map.get("longi");
+                String latitude = map.get("lati");
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });*/
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
             checkLocationPermission();
         }
@@ -133,14 +178,27 @@ public class Location extends FragmentActivity implements OnMapReadyCallback,
             currentLocationMarker.remove();
         }
         LatLng latlang= new LatLng(location.getLatitude(),location.getLongitude());
+        Toast.makeText(this,"Latitude is"+lati,Toast.LENGTH_LONG).show();
+
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(latlang);
         markerOptions.title("Current Location");
-        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
         currentLocationMarker = mMap.addMarker(markerOptions);
 
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latlang));
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latlang, 15));
+
+        LocationInfo locationInfo = new LocationInfo(longi, lati, location_id);
+        FirebaseUser user = Auth.getCurrentUser();
+
+        mRef = FirebaseDatabase.getInstance().getReference().child("Locations").child(user.getUid());
+        DatabaseReference root = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference users = root.child("Locations");
+        mRef.push().child(location_id);
+        mRef = FirebaseDatabase.getInstance().getReference().child("Locations").child(user.getUid()).child(location_id);
+        mRef.setValue(locationInfo);
+        Toast.makeText(getApplicationContext(), "Location added" + longi, Toast.LENGTH_LONG).show();
 
         if(client != null){
             LocationServices.FusedLocationApi.removeLocationUpdates(client,this);
@@ -164,5 +222,16 @@ public class Location extends FragmentActivity implements OnMapReadyCallback,
                 doubleBackToExitPressedOnce=false;
             }
         }, 2000);
+    }
+
+    private void location() {
+        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        //   locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10, Criteria.ACCURACY_FINE, (android.location.LocationListener) listen);
+
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        return false;
     }
 }

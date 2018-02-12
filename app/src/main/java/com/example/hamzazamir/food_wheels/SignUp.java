@@ -2,10 +2,13 @@ package com.example.hamzazamir.food_wheels;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -17,6 +20,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.gcm.TaskParams;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -27,6 +31,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.UUID;
+
 public class SignUp extends AppCompatActivity implements View.OnClickListener {
     private Button signup_btn;
     private EditText signup_name;
@@ -36,11 +42,16 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
     private EditText signup_email;
     private EditText signup_repass;
     private TextView SignedUp;
+    final String location_id = UUID.randomUUID().toString();
     private Spinner Type;
 
     private FirebaseAuth Auth;
     private FirebaseDatabase database;
     private DatabaseReference mRef;
+
+    LocationManager locationManager;
+    static double longi;
+    static double lati;
 
     private ProgressDialog progressDialog;
     private static final String TAG = SignUp.class.getSimpleName();
@@ -53,11 +64,11 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
         Auth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
         if (Auth.getCurrentUser() != null) {
-        finish();
+            finish();
             //Toast.makeText(this, "Already SignedUp", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(getApplicationContext(), AccountInfo.class));
             //  startActivity(new Intent(getApplicationContext(), MainActivity.class));
-       }
+        }
 
         signup_email = (EditText) findViewById(R.id.signup_email);
         signup_password = (EditText) findViewById(R.id.signup_pass);
@@ -78,7 +89,9 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
     }
 
     private void SaveInfo() {
+
         mRef = database.getReference().child("USERS");
+
         String name = signup_name.getText().toString().trim();
         String addr = signup_address.getText().toString().trim();
         String cont = signup_contact.getText().toString().trim();
@@ -86,9 +99,37 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
         String type = Type.getSelectedItem().toString().trim();
 
         FirebaseUser user = Auth.getCurrentUser();
-        UserData userData = new UserData(name, email,cont, addr, type);
+        UserData userData = new UserData(name, email, cont, addr, type);
         mRef.child(user.getUid()).setValue(userData);
+     //   location();
+
     }
+
+   /* private void location() {
+        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        LocationListener listen = new LocationListener() {
+            @Override
+            public void onLocationChanged(Location location) {
+
+                longi = location.getLongitude();
+                lati = location.getLatitude();
+            }
+        };
+
+        Toast.makeText(this,"Latitude is"+lati,Toast.LENGTH_LONG).show();
+        LocationInfo locationInfo = new LocationInfo(longi, lati, location_id);
+        FirebaseUser user = Auth.getCurrentUser();
+
+        mRef = FirebaseDatabase.getInstance().getReference().child("Locations").child(user.getUid());
+        DatabaseReference root = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference users = root.child("Locations");
+        mRef.push().child(location_id);
+        mRef = FirebaseDatabase.getInstance().getReference().child("Locations").child(user.getUid()).child(location_id);
+        mRef.setValue(locationInfo);
+        Toast.makeText(getApplicationContext(), "Location added" + longi, Toast.LENGTH_LONG).show();
+     //   locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10, Criteria.ACCURACY_FINE, (android.location.LocationListener) listen);
+
+    } */
 
     private void registerUser() {
 

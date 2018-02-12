@@ -10,12 +10,14 @@ public class UserData {
     private String address;
     private String type;
 
-    public UserData(String name, String email, String contact, String address,String type){
+
+    public UserData(String name, String email, String contact, String address, String type){
             this.name = name;
             this.email = email;
             this.contact = contact;
             this.address = address;
             this.type = type;
+
         }
 
 

@@ -3,10 +3,10 @@
     package="com.example.hamzazamir.food_wheels">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
 
     <application
         android:allowBackup="true"
@@ -28,7 +28,6 @@
         <activity android:name=".Menu" />
         <activity android:name=".Menu_List" />
         <activity android:name=".AddItem" />
-        <activity android:name=".BaseNavigation" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -43,7 +42,11 @@
 
         <activity
             android:name=".Location"
-            android:label="@string/title_activity_location"></activity>
+            android:label="@string/title_activity_location" />
+        <activity
+            android:name=".NavMenu"
+            android:label="@string/title_activity_nav_menu"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

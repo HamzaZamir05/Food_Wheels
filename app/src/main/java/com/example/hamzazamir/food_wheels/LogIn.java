@@ -44,7 +44,7 @@ public class LogIn extends AppCompatActivity implements View.OnClickListener {
         Auth = FirebaseAuth.getInstance();
         if (Auth.getCurrentUser() != null) {
             finish();
-            startActivity(new Intent(getApplicationContext(), com.example.hamzazamir.food_wheels.Location.class));
+            startActivity(new Intent(getApplicationContext(), AccountInfo.class));
         }
 
         login_btn = (Button) findViewById(R.id.login_btn);
