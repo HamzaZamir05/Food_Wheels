@@ -97,7 +97,7 @@ public class LogIn extends AppCompatActivity implements View.OnClickListener {
                         }
                         else{
                             finish();
-                            startActivity(new Intent(getApplicationContext(), AccountInfo.class));
+                            startActivity(new Intent(getApplicationContext(), com.example.hamzazamir.food_wheels.Location.class));
                         }
                     }
                 });

@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.gcm.TaskParams;
 import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -101,22 +102,18 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
         FirebaseUser user = Auth.getCurrentUser();
         UserData userData = new UserData(name, email, cont, addr, type);
         mRef.child(user.getUid()).setValue(userData);
-     //   location();
 
     }
 
-   /* private void location() {
+    private void GetCoordinates() {
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         LocationListener listen = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
+        LatLng latlang= new LatLng(location.getLatitude(),location.getLongitude());
 
-                longi = location.getLongitude();
-                lati = location.getLatitude();
-            }
-        };
-
-        Toast.makeText(this,"Latitude is"+lati,Toast.LENGTH_LONG).show();
+        longi = location.getLongitude();
+        lati = location.getLatitude();
         LocationInfo locationInfo = new LocationInfo(longi, lati, location_id);
         FirebaseUser user = Auth.getCurrentUser();
 
@@ -126,10 +123,12 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
         mRef.push().child(location_id);
         mRef = FirebaseDatabase.getInstance().getReference().child("Locations").child(user.getUid()).child(location_id);
         mRef.setValue(locationInfo);
-        Toast.makeText(getApplicationContext(), "Location added" + longi, Toast.LENGTH_LONG).show();
-     //   locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10, Criteria.ACCURACY_FINE, (android.location.LocationListener) listen);
+            }
+        };
 
-    } */
+
+    }
+
 
     private void registerUser() {
 
@@ -217,6 +216,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
                         //checking if success
                         if (task.isSuccessful()) {
                             //display some message here
+                            GetCoordinates();
                             Toast.makeText(SignUp.this, "Successfully registered", Toast.LENGTH_LONG).show();
                            SaveInfo();
                             startActivity(new Intent(getApplicationContext(), com.example.hamzazamir.food_wheels.Location.class));

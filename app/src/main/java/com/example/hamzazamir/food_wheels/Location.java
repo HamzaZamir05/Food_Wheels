@@ -60,7 +60,7 @@ public class Location extends FragmentActivity implements OnMapReadyCallback,
     private Marker currentLocationMarker;
     public static final int  REQUEST_LOCATION = 99;
 
-   // String location_id = null;
+    // String location_id = null;
 
     boolean doubleBackToExitPressedOnce = false;
 
@@ -71,23 +71,7 @@ public class Location extends FragmentActivity implements OnMapReadyCallback,
         setContentView(R.layout.activity_location);
 
         Auth = FirebaseAuth.getInstance();
-        FirebaseUser user = Auth.getCurrentUser();
-     /*   mRef =  FirebaseDatabase.getInstance().getReference().child("Locations").child(user.getUid()).child(location_id);
-        mRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Map<String, String> map = (Map)dataSnapshot.getValue();
 
-                String longitude = map.get("longi");
-                String latitude = map.get("lati");
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });*/
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
             checkLocationPermission();
         }
@@ -172,25 +156,47 @@ public class Location extends FragmentActivity implements OnMapReadyCallback,
     }
 
     @Override
-    public void onLocationChanged(android.location.Location location) {
+    public void onLocationChanged(final android.location.Location location) {
         lastlocation = location;
         if(currentLocationMarker != null){
             currentLocationMarker.remove();
         }
-        LatLng latlang= new LatLng(location.getLatitude(),location.getLongitude());
-        Toast.makeText(this,"Latitude is"+lati,Toast.LENGTH_LONG).show();
 
-        MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.position(latlang);
-        markerOptions.title("Current Location");
-        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
-        currentLocationMarker = mMap.addMarker(markerOptions);
-
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(latlang));
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latlang, 15));
-
-        LocationInfo locationInfo = new LocationInfo(longi, lati, location_id);
         FirebaseUser user = Auth.getCurrentUser();
+
+        mRef =  FirebaseDatabase.getInstance().getReference().child("Locations").child(user.getUid()).child(location_id);
+        mRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Map<Double, Double> map = (Map)dataSnapshot.getValue();
+
+                double longitude = map.get("longi");
+                double latitude = map.get("lati");
+
+                LatLng latlang= new LatLng(latitude,longitude);
+
+                MarkerOptions markerOptions = new MarkerOptions();
+                markerOptions.position(latlang);
+                markerOptions.title("Current Location");
+                markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
+                currentLocationMarker = mMap.addMarker(markerOptions);
+
+                mMap.moveCamera(CameraUpdateFactory.newLatLng(latlang));
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latlang, 15));
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+
+        longi = location.getLongitude();
+        lati = location.getLatitude();
+        LocationInfo locationInfo = new LocationInfo(longi, lati, location_id);
 
         mRef = FirebaseDatabase.getInstance().getReference().child("Locations").child(user.getUid());
         DatabaseReference root = FirebaseDatabase.getInstance().getReference();
@@ -198,7 +204,6 @@ public class Location extends FragmentActivity implements OnMapReadyCallback,
         mRef.push().child(location_id);
         mRef = FirebaseDatabase.getInstance().getReference().child("Locations").child(user.getUid()).child(location_id);
         mRef.setValue(locationInfo);
-        Toast.makeText(getApplicationContext(), "Location added" + longi, Toast.LENGTH_LONG).show();
 
         if(client != null){
             LocationServices.FusedLocationApi.removeLocationUpdates(client,this);
